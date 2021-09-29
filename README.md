@@ -1,6 +1,6 @@
 # S2TT
-Python program to use the services SpeechToText and Translator of IBM Watson \
-The GUI is made with tkinter library \
+Python program using Watson's "Speech to Text" service to transcribe an audio source (as a PoC, only supports English and French at the moment) and then "Language Translator v3" to translate the transcript in the requested language. To do so, this software makes use of API requests.
+The GUI is made with tkinter library.
 
 - main.py : first version
 - mainO.py : Object-oriented version
