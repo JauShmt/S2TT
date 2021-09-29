@@ -3,5 +3,5 @@ Python program using Watson's "Speech to Text" service to transcribe an audio so
 The GUI is made with tkinter library.
 
 ## Files structure
-The first version is the standalone file "main.py"
+The first version is the standalone file "main.py" \
 The object-oriented version is in the folder "ObjectOrientedVersion"
