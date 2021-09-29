@@ -8,14 +8,14 @@ from pandas import json_normalize
 from ibm_watson import LanguageTranslatorV3
 
 # API
-#  - s2t : SpeechToText
+  # - s2t : SpeechToText
 url_s2t = "https://api.eu-de.speech-to-text.watson.cloud.ibm.com/instances/079804c4-c237-49f9-b65b-5d749d5ff502"
 iam_apikey_s2t = "1gp0cp4UXZql1k0JZ3ihVuB-nPUUxKe28l5zu4f_ohiv"
 authenticator_st2 = IAMAuthenticator(iam_apikey_s2t)
 s2t = SpeechToTextV1(authenticator=authenticator_st2)
 s2t.set_service_url(url_s2t)
 
-#  -  lt : LanguageTranslator
+  # -  lt : LanguageTranslator
 url_lt = 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/c4991030-b223-49f7-9c04-1abf8862ad62'
 apikey_lt = 'MfIQ5EpLlm28Bitb17l358p8J8U3eumg-5BEMGY7bMjS'
 version_lt = '2018-05-01'
@@ -23,7 +23,7 @@ authenticator_lt = IAMAuthenticator(apikey_lt)
 language_translator = LanguageTranslatorV3(version=version_lt, authenticator=authenticator_lt)
 language_translator.set_service_url(url_lt)
 
-# Languages handling variables
+# Language handling variables
 s2t_lg = 'en-US_BroadbandModel'
 language_list = ['En', 'Fr']
 language_source = 'en'
@@ -66,7 +66,7 @@ def browsefunc():
     global final_result_s2t
 
     filename =askopenfilename(filetypes=(("Audio files", "*.mp3 *.ogg *.mpeg *.wav *.webm"),("All files","*.*")))
-    ent1.insert(tk.END, filename)  # add this
+    ent1.insert(tk.END, filename)
 
     print('browse file')
 
@@ -89,7 +89,7 @@ def browsefunc():
         final_result_s2t = '\n'.join(s2t_responses_list)
         TextArea.insert(tk.INSERT, final_result_s2t)
     except FileNotFoundError as e:
-        TextArea.insert(tk.INSERT, '-> ERROR No file selected')
+        TextArea.insert(tk.INSERT, '[ERROR No file selected]\n')
         print(e)
 
 
@@ -109,6 +109,7 @@ def translate():
         TranslateArea.delete('1.0', tk.END)
         TranslateArea.insert(tk.INSERT, tl_result)
     except ibm_cloud_sdk_core.api_exception.ApiException as e:
+        TranslateArea.delete('1.0', tk.END)
         TranslateArea.insert(tk.INSERT, 'Error 404: Selected translation language same as speech language')
         print(e)
         return
@@ -119,8 +120,8 @@ b2.grid(row=4, column=2)
 
 
 # SpeechToText & translation languages handling functions :
-#  - set_speech_lg : handle SpeechToText & translation source language
-#  - set_targ_lg : handle LanguageTranslator target language
+  # - set_speech_lg : handle SpeechToText & translation source language
+
 def set_speech_lg(*args):
     global s2t_lg
     global language_source
@@ -135,6 +136,7 @@ def set_speech_lg(*args):
         language_source = 'en'
 
 
+  # - set_targ_lg : handle LanguageTranslator target language
 def set_targ_lg(*args):
     global target_lg
     print('change target')
